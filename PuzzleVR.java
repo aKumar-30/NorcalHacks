@@ -105,4 +105,34 @@ public class PuzzleVR {
         }
         return imgs;
     }
+    
+    private JButton puzzlePieces2[][];
+
+    private ArrayList<JButton> puzzlePieceShuffle = new ArrayList<JButton>();
+    public void shuffle()
+    {
+
+        for ( int i = 0; i < puzzlePieces.length; i++ )
+        {
+            // tiny change 1: proper dimensions
+            for ( int j = 0; j < puzzlePieces[i].length; j++ )
+            {
+                // tiny change 2: actually store the values
+                puzzlePieceShuffle.add( puzzlePieces[i][j] );
+            }
+        }
+        Collections.shuffle( puzzlePieceShuffle );
+        // now you need to find a mode in the list.
+
+        puzzlePieces2 = new JButton[puzzlePieceShuffle
+            .size()][puzzlePieceShuffle.size()];
+        for ( int i = 0; i < puzzlePieceShuffle.size(); i++ )
+        {
+            for ( int j = 0; j < puzzlePieceShuffle.size(); j++ )
+            {
+                puzzlePieces2[i][j] = puzzlePieceShuffle
+                    .get( j + ( puzzlePieceShuffle.size() * i ) );
+            }
+        }
+    }
 }
