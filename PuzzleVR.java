@@ -29,10 +29,10 @@ public class PuzzleVR {
 
     private JFrame frame;
     private JLabel[] labels;
-    private final int rows = 3; //You should decide the values for rows and cols variables
-    private final int cols = 3;
+    private final int rows = 5;
+    private final int cols = 4;
     private final int chunks = rows * cols;
-    private final int SPACING = 10;//spacing between split images
+    private final int SPACING = 5;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -72,8 +72,17 @@ public class PuzzleVR {
     private BufferedImage[] getImages() {
        
         BufferedImage originalImage = null;
+        URL url1 = null;
+       try
+        {
+            url1 = new URL("https://kids.nationalgeographic.com/explore/monuments/eiffel-tower/_jcr_content/content/textimage_6.img.jpg/1581608715365.jpg");
+        } 
+        catch (MalformedURLException e1) 
+        {
+            e1.printStackTrace();
+        }
        try {
-        originalImage = ImageIO.read(new File("I:/eiffel.jpeg"));
+        originalImage = ImageIO.read(url1);
 } catch (IOException e) {
 }
         int chunkWidth = originalImage.getWidth() / cols; // determines the chunk width and height
