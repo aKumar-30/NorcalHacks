@@ -18,7 +18,6 @@ import java.io.PrintWriter;
  */
 public class IO {
 
-
     private static PrintWriter fileOut;
     private static BufferedReader fileIn;
 
@@ -26,7 +25,7 @@ public class IO {
         try {
             fileOut = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
         } catch (IOException e) {
-            System.out.println("*** Cannot create file: " + fileName + " ***");
+            System.out.print("*** Cannot create file: " + fileName + "  ***");
         }
     }
 
@@ -34,7 +33,7 @@ public class IO {
         try {
             fileOut = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)));
         } catch (IOException e) {
-            System.out.println("*** Cannot open file: " + fileName + " ***");
+            System.out.println("*** Cannot open file: " + fileName + "  ***");
         }
     }
 
@@ -46,21 +45,21 @@ public class IO {
         fileOut.println(text);
     }
 
-    public static void closeOutputFile() {
-        fileOut.close();
-    }
-
     public static void openInputFile(String fileName) {
         try {
             fileIn = new BufferedReader(new FileReader(fileName));
         } catch (FileNotFoundException e) {
-            System.out.println("***Cannot open " + fileName + "***");
+            System.out.println("***Cannot open " + fileName + "  ***");
         }
     }
 
     public static String readLine() throws IOException //Note: if there's an error in this method it will return IOException
     {
         return fileIn.readLine();
+    }
+ 
+     public static void closeOutputFile() throws IOException{
+        fileOut.close();
     }
 
     public static void closeInputFile() throws IOException //Note: if there's an error in this method it will return IOException
