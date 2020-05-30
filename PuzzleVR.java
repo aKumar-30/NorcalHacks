@@ -29,8 +29,8 @@ public class PuzzleVR {
 
     private JFrame frame;
     private JLabel[] labels;
-    private final int rows = 5;
-    private final int cols = 4;
+    private final int rows = 7;
+    private final int cols = 6;
     private final int chunks = rows * cols;
     private final int SPACING = 5;
 
@@ -45,7 +45,7 @@ public class PuzzleVR {
     }
 
     private void createGUI() {
-        frame = new JFrame("Puzzle");
+        frame = new JFrame("Puzzle Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         split();
         frame.setResizable(false);
@@ -89,8 +89,8 @@ public class PuzzleVR {
         int chunkHeight = originalImage.getHeight() / rows;
         int count = 0;
         BufferedImage imgs[] = new BufferedImage[chunks]; //Image array to hold image chunks
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < cols; y++) {
+        for (int x = 1; x <= rows; x++) {
+            for (int y = 1; y <= cols; y++) {
                 //Initialize the image array with image chunks
                 imgs[count] = new BufferedImage(chunkWidth, chunkHeight, originalImage.getType());
 
