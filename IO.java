@@ -54,7 +54,7 @@ public class IO {
         try {
             fileIn = new BufferedReader(new FileReader(fileName));
         } catch (FileNotFoundException e) {
-            System.out.println("***Cannot open " + fileName + "***");
+            System.out.println("***Cannot open " + fileName + " ***");
         }
     }
 
