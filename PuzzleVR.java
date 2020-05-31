@@ -1,4 +1,3 @@
-
 package puzzlevr;
 
 /**
@@ -23,6 +22,7 @@ import javax.swing.SwingUtilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JButton;
+import java.util.*;
 
 public class PuzzleVR {
 
@@ -32,6 +32,7 @@ public class PuzzleVR {
     private final int cols = 6;
     private final int chunks = rows * cols;
     private JButton puzzlePieces[][] = new JButton[rows][cols];
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -50,6 +51,7 @@ public class PuzzleVR {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+       
     }
 
     private void split() {
@@ -59,18 +61,19 @@ public class PuzzleVR {
         //setting the contentpane layout (size, etc) for grid layout 
         frame.getContentPane().setLayout(new GridLayout(rows, cols));
 
-        
          for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 ImageIcon pic = new ImageIcon(Toolkit.getDefaultToolkit().createImage(imgs[counter].getSource()));
                 puzzlePieces[i][j] = new JButton(pic);
                 puzzlePieces[i][j].setActionCommand("(" + i + j + ")");
                 //puzzlePieces[i][j].addActionListener(this);
-                frame.getContentPane().add(puzzlePieces[i][j]);
+                
                 counter++;
-            }
+              }  
+               
+            }shuffle();
         }
-    }
+    
 
     private BufferedImage[] getImages() {
        
@@ -105,4 +108,36 @@ public class PuzzleVR {
         }
         return imgs;
     }
+   
+
+private JButton puzzlePieces2[][];
+
+private ArrayList<JButton> puzzlePieceShuffle = new ArrayList<JButton>();
+public void shuffle()
+{
+ int index=0;
+    for ( int i = 0; i < puzzlePieces.length; i++ )
+    {
+        // tiny change 1: proper dimensions
+        for ( int j = 0; j < puzzlePieces[i].length; j++ )
+        {
+            // tiny change 2: actually store the values
+            puzzlePieceShuffle.add( puzzlePieces[i][j] );
+        }
+    }
+    Collections.shuffle( puzzlePieceShuffle );
+    // now you need to find a mode in the list.
+
+    puzzlePieces2 = new JButton[rows][cols];
+    
+    for ( int i = 0; i < rows; i++ )
+    {
+        for ( int j = 0; j < cols; j++)
+        {
+            puzzlePieces2[i][j] = puzzlePieceShuffle.get(index);
+            frame.getContentPane().add(puzzlePieces2[i][j]);
+            index++;
+        }
+    }
+}
 }
