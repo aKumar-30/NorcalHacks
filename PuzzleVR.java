@@ -140,9 +140,10 @@ public void shuffle()
 
  public void changeImage(int x1, int y1, int t1, int x2, int y2, int t2) {
        
-            puzzlePieces2[x1][y1].setActionCommand(Integer.toString(x1)+Integer.toString(y1)+Integer.toString(t2));
-            puzzlePieces2[x2][y2].setActionCommand(Integer.toString(x2) +Integer.toString(y2) + Integer.toString(t1));
-
+            puzzlePieces2[x1][y1].setActionCommand("("+Integer.toString(x1)+Integer.toString(y1)+")"+Integer.toString(t2));
+            System.out.println(Integer.toString(t2));
+            puzzlePieces2[x2][y2].setActionCommand("("+Integer.toString(x2) +Integer.toString(y2)+")"+ Integer.toString(t1));
+            System.out.println(Integer.toString(t1));
             Icon temp = puzzlePieces2[x1][y1].getIcon();
             puzzlePieces2[x1][y1].setIcon(puzzlePieces2[x2][y2].getIcon());
             puzzlePieces2[x2][y2].setIcon(temp);
