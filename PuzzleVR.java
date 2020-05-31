@@ -1,3 +1,4 @@
+
 package puzzlevr;
 
 import java.awt.event.*;
@@ -141,12 +142,12 @@ public void shuffle()
  public void changeImage(int x1, int y1, int t1, int x2, int y2, int t2) {
        
             puzzlePieces2[x1][y1].setActionCommand("("+Integer.toString(x1)+Integer.toString(y1)+")"+Integer.toString(t2));
-            System.out.println(Integer.toString(t2));
             puzzlePieces2[x2][y2].setActionCommand("("+Integer.toString(x2) +Integer.toString(y2)+")"+ Integer.toString(t1));
-            System.out.println(Integer.toString(t1));
             Icon temp = puzzlePieces2[x1][y1].getIcon();
             puzzlePieces2[x1][y1].setIcon(puzzlePieces2[x2][y2].getIcon());
             puzzlePieces2[x2][y2].setIcon(temp);
+            
+           
         }
     
  
@@ -157,6 +158,9 @@ public void shuffle()
         } else {
             coord2 = getXY(e.getActionCommand());
             changeImage(coord1[0], coord1[1], coord1[2], coord2[0], coord2[1], coord2[2]);
+            if(checkSolve()==true){
+            frame.dispose();
+            }
             turn--;
         }
 }
@@ -170,4 +174,38 @@ public void shuffle()
         System.out.println(xy[0]+" "+xy[1]+" "+xy[2]);
         return xy;
     }
+  
+ /* private boolean checkSolve(){
+      int one;
+      int two;
+     
+      for (int i=0; i<rows; i++) {
+          for (int j=0; j<cols-1; j++) {
+              one = Integer.parseInt(puzzlePieces2[i][j].getActionCommand().substring(4));
+              two = Integer.parseInt(puzzlePieces2[i][j+1].getActionCommand().substring(4));
+              
+              System.out.println(one+" "+two);
+             // if(one+1 != two);
+              
+      }
+    }
+      return false;
+  
+  } */
+  private boolean checkSolve(){
+      int one;
+      int two;
+     
+      for (int i=0; i<rows; i++) {
+          for (int j=0; j<cols-1; j++) {
+              one = Integer.parseInt(puzzlePieces2[i][j].getActionCommand().substring(4));
+              two = Integer.parseInt(puzzlePieces2[i][j+1].getActionCommand().substring(4));
+              
+              if(one+1 != two);
+              return false;
+      }
+    }
+      return true;
+  
+  } 
 }
