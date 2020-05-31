@@ -1,19 +1,11 @@
 package puzzlevr;
 
-/**
- *
- * @author angelac
- */
+import java.awt.event.*;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,8 +15,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JButton;
 import java.util.*;
+import javax.swing.Icon;
 
-public class PuzzleVR {
+public class PuzzleVR implements ActionListener {
 
     private JFrame frame;
     private JLabel[] labels;
@@ -32,6 +25,9 @@ public class PuzzleVR {
     private final int cols = 6;
     private final int chunks = rows * cols;
     private JButton puzzlePieces[][] = new JButton[rows][cols];
+    private int coord1[] = new int[3];
+    private int coord2[] = new int[3];
+    private int turn = 0;
     
 
     public static void main(String[] args) {
@@ -65,8 +61,7 @@ public class PuzzleVR {
             for (int j = 0; j < cols; j++) {
                 ImageIcon pic = new ImageIcon(Toolkit.getDefaultToolkit().createImage(imgs[counter].getSource()));
                 puzzlePieces[i][j] = new JButton(pic);
-                puzzlePieces[i][j].setActionCommand("(" + i + j + ")");
-                //puzzlePieces[i][j].addActionListener(this);
+                puzzlePieces[i][j].setActionCommand(Integer.toString(i)+Integer.toString(j)+Integer.toString(counter));
                 
                 counter++;
               }  
@@ -136,8 +131,41 @@ public void shuffle()
         {
             puzzlePieces2[i][j] = puzzlePieceShuffle.get(index);
             frame.getContentPane().add(puzzlePieces2[i][j]);
+            puzzlePieces[i][j].addActionListener(this);
             index++;
         }
     }
 }
+
+ public void changeImage(int x1, int y1, int t1, int x2, int y2, int t2) {
+       
+            puzzlePieces2[x1][y1].setActionCommand(Integer.toString(x2)+Integer.toString(y2)+Integer.toString(t2));
+            puzzlePieces2[x2][y2].setActionCommand(Integer.toString(x1) +Integer.toString(y1) + Integer.toString(t1));
+
+            Icon temp = puzzlePieces2[x1][y1].getIcon();
+            puzzlePieces2[x1][y1].setIcon(puzzlePieces[x2][y2].getIcon());
+            puzzlePieces2[x2][y2].setIcon(temp);
+        }
+    
+ 
+ public void actionPerformed(ActionEvent e) {
+        if (turn == 0) {
+            coord1 = getXY(e.getActionCommand());
+            turn++;
+        } else {
+            coord2 = getXY(e.getActionCommand());
+            changeImage(coord1[0], coord1[1], coord1[2], coord2[0], coord2[1], coord2[2]);
+            turn--;
+        }
+}
+ 
+  public static int[] getXY(String tag) {
+        int xy[] = new int[3];
+
+        xy[0] = Integer.parseInt(tag.substring(0, 1));
+        xy[1] = Integer.parseInt(tag.substring(1, 2));
+        xy[2] = Integer.parseInt(tag.substring(2));
+        System.out.println(xy[0]);
+        return xy;
+    }
 }
