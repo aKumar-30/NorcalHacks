@@ -1,6 +1,4 @@
 
-package puzzlevr;
-
 import java.awt.event.*;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -19,6 +17,18 @@ import java.util.*;
 import javax.swing.Icon;
 
 
+/**
+ * A puzzle game that leads to a VR image of the place shown in the completed
+ * image.
+ *
+ *
+ * @author Malavika, Arjun, Angela, Yalda
+ * @version May 31, 2020
+ * @author Period: TODO
+ * @author Assignment: PuzzleVR
+ *
+ * @author Sources: TODO
+ */
 public class PuzzleVR implements ActionListener
 {
 
@@ -41,6 +51,12 @@ public class PuzzleVR implements ActionListener
     private int turn = 0;
 
 
+    /**
+     * main method for the game & vr
+     *
+     * @param args
+     *            string array
+     */
     public static void main( String[] args )
     {
         SwingUtilities.invokeLater( new Runnable()
@@ -55,6 +71,9 @@ public class PuzzleVR implements ActionListener
     }
 
 
+    /**
+     * Creates the frame for the game
+     */
     private void createGUI()
     {
         frame = new JFrame( "Puzzle" );
@@ -67,6 +86,9 @@ public class PuzzleVR implements ActionListener
     }
 
 
+    /**
+     * Makes the grid layout with all the pieces filling up one spot.
+     */
     private void split()
     {
 
@@ -93,6 +115,11 @@ public class PuzzleVR implements ActionListener
     }
 
 
+    /**
+     * Splits up the image into many pieces as if it were a puzzle.
+     *
+     * @return and array with all the chucks of the image.
+     */
     private BufferedImage[] getImages()
     {
 
@@ -146,6 +173,9 @@ public class PuzzleVR implements ActionListener
     private ArrayList<JButton> puzzlePieceShuffle = new ArrayList<JButton>();
 
 
+    /**
+     * Shuffles the original puzzle pieces at the start of the game.
+     */
     public void shuffle()
     {
         int index = 0;
@@ -178,6 +208,16 @@ public class PuzzleVR implements ActionListener
     }
 
 
+    /**
+     * TODO Write your method description here.
+     *
+     * @param x1
+     * @param y1
+     * @param t1
+     * @param x2
+     * @param y2
+     * @param t2
+     */
     public void changeImage( int x1, int y1, int t1, int x2, int y2, int t2 )
     {
 
@@ -217,6 +257,11 @@ public class PuzzleVR implements ActionListener
     }
 
 
+    /**
+     *
+     * @param tag
+     * @return
+     */
     public static int[] getXY( String tag )
     {
         int xy[] = new int[3];
@@ -243,6 +288,11 @@ public class PuzzleVR implements ActionListener
      *
      * }
      */
+    /**
+     * Checks to see if the puzzle has been solved correctly
+     *
+     * @return true - if the puzzle is completed, false otherwise
+     */
     private boolean checkSolve()
     {
         int one;
@@ -267,6 +317,13 @@ public class PuzzleVR implements ActionListener
 
     }
 
+
+    /**
+     * Out of the 5 picture offered chooses one of them for the user to complete
+     * the puzzle with.
+     *
+     * @return the url of the picture chosen to be split up.
+     */
 
     public URL choosePic()
     {
@@ -294,7 +351,7 @@ public class PuzzleVR implements ActionListener
         try
         {
             urls.add( new URL(
-                    "https://cdn.cnn.com/cnnnext/dam/assets/181010131059-australia-best-beaches-cossies-beach-cocos3.jpg" ) );
+                    "https://dynaimage.cdn.cnn.com/cnn/w_1200/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F181010131059-australia-best-beaches-cossies-beach-cocos3-super-tease.jpg" ) );
         }
         catch ( MalformedURLException e1 )
         {
@@ -303,7 +360,7 @@ public class PuzzleVR implements ActionListener
         try
         {
             urls.add( new URL(
-                    "https://i.pinimg.com/474x/18/df/93/18df93e105a5205d922c8fe155dbc2fc.jpg" ) );
+                    "https://fb.ru/media/i/3/7/8/4/4/4/i/378444.jpg" ) );
 
         }
         catch ( MalformedURLException e1 )
@@ -313,7 +370,7 @@ public class PuzzleVR implements ActionListener
         try
         {
             urls.add( new URL(
-                    "https://media.architecturaldigest.com/photos/56328adbc0f017f231baf0ac/2:1/w_5226,h_2613,c_limit/sagrada-familia.jpg\n" ) );
+                    "https://clevertravel.com.ua/wp-content/uploads/2016/04/3.sagrada-familia-1024x768.jpg\n" ) );
 
         }
         catch ( MalformedURLException e1 )
