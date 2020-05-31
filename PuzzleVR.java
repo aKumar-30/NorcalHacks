@@ -61,7 +61,7 @@ public class PuzzleVR implements ActionListener {
             for (int j = 0; j < cols; j++) {
                 ImageIcon pic = new ImageIcon(Toolkit.getDefaultToolkit().createImage(imgs[counter].getSource()));
                 puzzlePieces[i][j] = new JButton(pic);
-                puzzlePieces[i][j].setActionCommand(Integer.toString(i)+Integer.toString(j)+Integer.toString(counter));
+                puzzlePieces[i][j].setActionCommand(Integer.toString(counter));
                 
                 counter++;
               }  
@@ -130,8 +130,9 @@ public void shuffle()
         for ( int j = 0; j < cols; j++)
         {
             puzzlePieces2[i][j] = puzzlePieceShuffle.get(index);
+            puzzlePieces2[i][j].setActionCommand("(" + i + j + ")"+puzzlePieceShuffle.get(index).getActionCommand());
             frame.getContentPane().add(puzzlePieces2[i][j]);
-            puzzlePieces[i][j].addActionListener(this);
+            puzzlePieces2[i][j].addActionListener(this);
             index++;
         }
     }
@@ -139,11 +140,11 @@ public void shuffle()
 
  public void changeImage(int x1, int y1, int t1, int x2, int y2, int t2) {
        
-            puzzlePieces2[x1][y1].setActionCommand(Integer.toString(x2)+Integer.toString(y2)+Integer.toString(t2));
-            puzzlePieces2[x2][y2].setActionCommand(Integer.toString(x1) +Integer.toString(y1) + Integer.toString(t1));
+            puzzlePieces2[x1][y1].setActionCommand(Integer.toString(x1)+Integer.toString(y1)+Integer.toString(t2));
+            puzzlePieces2[x2][y2].setActionCommand(Integer.toString(x2) +Integer.toString(y2) + Integer.toString(t1));
 
             Icon temp = puzzlePieces2[x1][y1].getIcon();
-            puzzlePieces2[x1][y1].setIcon(puzzlePieces[x2][y2].getIcon());
+            puzzlePieces2[x1][y1].setIcon(puzzlePieces2[x2][y2].getIcon());
             puzzlePieces2[x2][y2].setIcon(temp);
         }
     
@@ -162,10 +163,10 @@ public void shuffle()
   public static int[] getXY(String tag) {
         int xy[] = new int[3];
 
-        xy[0] = Integer.parseInt(tag.substring(0, 1));
-        xy[1] = Integer.parseInt(tag.substring(1, 2));
-        xy[2] = Integer.parseInt(tag.substring(2));
-        System.out.println(xy[0]);
+        xy[0] = Integer.parseInt(tag.substring(1, 2));
+        xy[1] = Integer.parseInt(tag.substring(2, 3));
+        xy[2] = Integer.parseInt(tag.substring(4));
+        System.out.println(xy[0]+" "+xy[1]+" "+xy[2]);
         return xy;
     }
 }
